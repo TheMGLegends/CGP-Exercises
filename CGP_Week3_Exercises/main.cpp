@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include "SDL.h"
 
 SDL_Window* g_sdlWindow;
@@ -30,6 +31,8 @@ SDL_Texture* LoadTexture(const char* filename)
 
 int main(int argc, char* argv[])
 {
+	srand(unsigned int(time(NULL)));
+
 	// TODO: Initialise all SDL subsystems
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -54,6 +57,25 @@ int main(int argc, char* argv[])
 	}
 
 	SDL_Texture* doorTexture = LoadTexture("Assets/door.bmp");
+	SDL_Texture* crusaderTexture = LoadTexture("Assets/crusader.bmp");
+	//SDL_Texture* fishTexture = LoadTexture("Assets/fish_blue1.bmp");
+
+	// TODO: Creating texture without a surface
+	SDL_Texture* textureWithoutSurface = SDL_CreateTexture(g_sdlRenderer, SDL_PIXELFORMAT_ABGR32, SDL_TEXTUREACCESS_TARGET, 20, 20);
+
+	// TODO: Changing texture pixel data manually
+	SDL_SetRenderTarget(g_sdlRenderer, textureWithoutSurface);
+
+	// TODO: Change background colour of renderer
+	SDL_SetRenderDrawColor(g_sdlRenderer, rand() % 255, rand() % 255, rand() % 255, SDL_ALPHA_OPAQUE);
+
+	SDL_Rect destinationForTWS{ 5, 5, 10, 10 };
+
+	SDL_RenderFillRect(g_sdlRenderer, &destinationForTWS);
+
+	SDL_SetRenderTarget(g_sdlRenderer, NULL);
+
+	SDL_SetRenderDrawColor(g_sdlRenderer, rand() % 255, rand() % 255, rand() % 255, SDL_ALPHA_OPAQUE);
 
 	for (int frameCount = 0; frameCount < 850; frameCount++) 
 	{
@@ -61,10 +83,14 @@ int main(int argc, char* argv[])
 		SDL_RenderClear(g_sdlRenderer);
 
 		// TODO: Create a destination for where the image will be copied {x, y, w, h}
-		SDL_Rect destinationRect{ frameCount, 25, 16, 16 };
+		SDL_Rect destinationRect{ frameCount, 0, 32, 32 };
+		SDL_Rect destinationRect2{ 0, frameCount, 32, 32 };
+		SDL_Rect destinationRect3{ frameCount, frameCount, 40, 40 };
 
 		// TODO: Copy the texture onto the rendering target
 		SDL_RenderCopy(g_sdlRenderer, doorTexture, NULL, &destinationRect);
+		SDL_RenderCopy(g_sdlRenderer, crusaderTexture, NULL, &destinationRect2);
+		SDL_RenderCopy(g_sdlRenderer, textureWithoutSurface, NULL, &destinationRect3);
 
 		// TODO: Update the screen with the state of the render target
 		SDL_RenderPresent(g_sdlRenderer);
@@ -75,6 +101,8 @@ int main(int argc, char* argv[])
 
 	// TODO: Clean up
 	SDL_DestroyTexture(doorTexture);
+	SDL_DestroyTexture(crusaderTexture);
+	SDL_DestroyTexture(textureWithoutSurface);
 	SDL_DestroyRenderer(g_sdlRenderer); // Opposite of SDL_CreateRenderer(...)
 	SDL_DestroyWindow(g_sdlWindow); // Opposite of SDL_CreateWindow(...)
 	SDL_Quit(); // Opposite of SDL_Init(...)
