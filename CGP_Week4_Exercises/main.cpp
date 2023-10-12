@@ -29,6 +29,9 @@ SDL_Texture* LoadTexture(const char* filename)
 	return texture;
 }
 
+const int SCREEN_W = 1000;
+const int SCREEN_H = 1000;
+
 int main(int argc, char* argv[])
 {
 	srand(unsigned int(time(NULL)));
@@ -40,7 +43,7 @@ int main(int argc, char* argv[])
 	}
 
 	// TODO: Create a window with the specified name, anywhere on the screen, 800x600 pixel size and no SDL_WindowFlags flags.
-	g_sdlWindow = SDL_CreateWindow("Week 1 - Intro and Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, NULL);
+	g_sdlWindow = SDL_CreateWindow("Week 1 - Intro and Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_W, SCREEN_H, NULL);
 
 	// TODO: Error checking
 	if (g_sdlWindow == nullptr)
@@ -61,7 +64,7 @@ int main(int argc, char* argv[])
 	//SDL_Texture* fishTexture = LoadTexture("Assets/fish_blue1.bmp");
 
 	// TODO: Creating texture without a surface
-	SDL_Texture* textureWithoutSurface = SDL_CreateTexture(g_sdlRenderer, SDL_PIXELFORMAT_ABGR32, SDL_TEXTUREACCESS_TARGET, 20, 20);
+	SDL_Texture* textureWithoutSurface = SDL_CreateTexture(g_sdlRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 20, 20);
 
 	// TODO: Changing texture pixel data manually
 	SDL_SetRenderTarget(g_sdlRenderer, textureWithoutSurface);
@@ -73,11 +76,18 @@ int main(int argc, char* argv[])
 
 	SDL_RenderFillRect(g_sdlRenderer, &destinationForTWS);
 
+	SDL_RenderClear(g_sdlRenderer);
+
 	SDL_SetRenderTarget(g_sdlRenderer, NULL);
 
 	SDL_SetRenderDrawColor(g_sdlRenderer, rand() % 255, rand() % 255, rand() % 255, SDL_ALPHA_OPAQUE);
 
 	bool keepRunning = true;
+
+	bool keyW = 0;
+	bool keyS = 0;
+	bool keyA = 0;
+	bool keyD = 0;
 
 	int keyboardX = 0;
 	int keyboardY = 0;
@@ -90,10 +100,41 @@ int main(int argc, char* argv[])
 	while (keepRunning)
 	{
 		SDL_Event sdlEvent;
-		while (SDL_PollEvent(&sdlEvent)) 
+		while (SDL_PollEvent(&sdlEvent))
 		{
+			if (keyW) keyboardY -= movementSpeed;
+			if (keyS) keyboardY += movementSpeed;
+			if (keyA) keyboardX -= movementSpeed;
+			if (keyD) keyboardX += movementSpeed;
+
+			if (sdlEvent.type == SDL_QUIT) keepRunning = false;
+			if (sdlEvent.type == SDL_KEYDOWN) 
+			{
+				switch (sdlEvent.key.keysym.sym)
+				{
+				case SDLK_ESCAPE: keepRunning = false; break;
+				case SDLK_w: keyW = 1; break;
+				case SDLK_s: keyS = 1; break;
+				case SDLK_a: keyA = 1; break;
+				case SDLK_d: keyD = 1; break;
+				default: break;
+				}
+			}
+			if (sdlEvent.type == SDL_KEYUP) 
+			{
+				switch (sdlEvent.key.keysym.sym)
+				{
+					case SDLK_w: keyW = 0; break;
+					case SDLK_s: keyS = 0; break;
+					case SDLK_a: keyA = 0; break;
+					case SDLK_d: keyD = 0; break;
+					default: break;
+				}
+			}
+
 			switch (sdlEvent.type)
 			{
+			/*
 			case SDL_QUIT:
 				keepRunning = false;
 				break;
@@ -102,27 +143,52 @@ int main(int argc, char* argv[])
 				{
 					keepRunning = false;
 				}
+				// ONLY UP
 				else if (sdlEvent.key.keysym.sym == SDLK_w)
 				{
-					keyboardY -= movementSpeed;
-					//--Y;
+					keyW = 1;
 				}
+				// ONLY DOWN
 				else if (sdlEvent.key.keysym.sym == SDLK_s)
 				{
-					keyboardY += movementSpeed;
-					//++Y;
+					keyS = 1;
 				}
+				// ONLY LEFT
 				else if (sdlEvent.key.keysym.sym == SDLK_a)
 				{
-					keyboardX -= movementSpeed;
-					//--X;
+					keyA = 1;
 				}
+				// ONLY RIGHT
 				else if (sdlEvent.key.keysym.sym == SDLK_d)
 				{
-					keyboardX += movementSpeed;
-					//++X;
+					keyD = 1;
 				}
 				break;
+			*/
+			/*
+			case SDL_KEYUP:
+				// ONLY UP
+				if (sdlEvent.key.keysym.sym == SDLK_w)
+				{
+					keyW = 0;
+				}
+				// ONLY DOWN
+				else if (sdlEvent.key.keysym.sym == SDLK_s)
+				{
+					keyS = 0;
+				}
+				// ONLY LEFT
+				else if (sdlEvent.key.keysym.sym == SDLK_a)
+				{
+					keyA = 0;
+				}
+				// ONLY RIGHT
+				else if (sdlEvent.key.keysym.sym == SDLK_d)
+				{
+					keyD = 0;
+				}
+				break;
+			*/
 			case SDL_MOUSEBUTTONDOWN:
 				if (sdlEvent.button.clicks == SDL_BUTTON_LEFT)
 				{
