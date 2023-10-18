@@ -102,6 +102,7 @@ int main(int argc, char* argv[])
 		SDL_Event sdlEvent;
 		while (SDL_PollEvent(&sdlEvent))
 		{
+			/*
 			if (keyW) keyboardY -= movementSpeed;
 			if (keyS) keyboardY += movementSpeed;
 			if (keyA) keyboardX -= movementSpeed;
@@ -131,13 +132,32 @@ int main(int argc, char* argv[])
 					default: break;
 				}
 			}
+			*/
+
+			const Uint8* state = SDL_GetKeyboardState(NULL);
+			if (state[SDL_SCANCODE_W])
+			{
+				std::cout << "W was pressed!" << std::endl;
+				keyboardY -= movementSpeed;
+			}
+			if (state[SDL_SCANCODE_S])
+			{
+				keyboardY += movementSpeed;
+			}
+			if (state[SDL_SCANCODE_A])
+			{
+				keyboardX -= movementSpeed;
+			}
+			if (state[SDL_SCANCODE_D]) {
+				keyboardX += movementSpeed;
+			}
 
 			switch (sdlEvent.type)
 			{
-			/*
 			case SDL_QUIT:
 				keepRunning = false;
 				break;
+			/*
 			case SDL_KEYDOWN:
 				if (sdlEvent.key.keysym.sym == SDLK_ESCAPE)
 				{
@@ -164,8 +184,6 @@ int main(int argc, char* argv[])
 					keyD = 1;
 				}
 				break;
-			*/
-			/*
 			case SDL_KEYUP:
 				// ONLY UP
 				if (sdlEvent.key.keysym.sym == SDLK_w)
