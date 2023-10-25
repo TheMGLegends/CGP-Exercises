@@ -12,6 +12,8 @@ TTF_Font* g_font;
 const int SCREEN_W = 1000;
 const int SCREEN_H = 1000;
 
+int g_fontPSize = 32;
+
 SDL_Texture* LoadTexture(const char* filename)
 {
 	// TODO: Load door.bmp as a surface
@@ -98,7 +100,7 @@ bool Initialise() {
 	}
 
 	// TODO: Load Font
-	g_font = TTF_OpenFont("Assets/8bitOperatorPlus8-Regular.ttf", 32);
+	g_font = TTF_OpenFont("Assets/8bitOperatorPlus8-Regular.ttf", g_fontPSize);
 	if (g_font == nullptr) {
 		std::cout << "TTF failed to load font. SDL_TTF error: " << TTF_GetError() << std::endl;
 		return true;
@@ -122,10 +124,22 @@ void CleanUp() {
 
 }
 
+void AutoResizeTextWidthAndHeight(const char* text, int &textWidth, int &textHeight) {
+	int size = 0;
+
+	while (text[size] != '\0') size++;
+
+	textHeight = g_fontPSize;
+	textWidth = size * textHeight;
+}
+
 
 int main(int argc, char* argv[])
 {
 	srand(unsigned int(time(NULL)));
+
+	int textWidth = 0;
+	int textHeight = 0;
 
 	if (Initialise()) {
 		std::cout << "Application failed to initialise. Quitting..." << std::endl;
@@ -134,19 +148,25 @@ int main(int argc, char* argv[])
 
 	// TODO: Load SFX
 	Mix_Chunk* coinSFX = Mix_LoadWAV("Assets/Coin01.wav");
+	Mix_VolumeChunk(coinSFX, 25);
 
 	// TODO: Load Music
 	Mix_Music* music = Mix_LoadMUS("Assets/rng_lo-fi_loop.mp3");
 	// TODO: Music playing infinitely
-	Mix_PlayMusic(music, -1);
+	//Mix_PlayMusic(music, -1);
+	Mix_FadeInMusic(music, -1, 5000);
+	Mix_VolumeMusic(50);
 
+	const char* text = "Hello World, Testing longer Sentence";
 
 	// TODO: Create texture:
-	SDL_Surface* textSurface = TTF_RenderText_Blended(g_font, "Hello World", { 255, 255, 255, 255 });
+	SDL_Surface* textSurface = TTF_RenderText_Blended(g_font, text, { 255, 215, 0, 255 });
+	AutoResizeTextWidthAndHeight(text, textWidth, textHeight);
+	SDL_Rect fontDstRect{ 0, 500, textWidth, textHeight };
 	SDL_Texture* textTexture = SDL_CreateTextureFromSurface(g_sdlRenderer, textSurface);
 	SDL_FreeSurface(textSurface);
 
-	//SDL_Texture* doorTexture = LoadTexture("Assets/door.bmp");
+	SDL_Texture* doorTexture = LoadTexture("Assets/door.png");
 	//SDL_Texture* crusaderTexture = LoadTexture("Assets/crusader.bmp");
 	SDL_Texture* pngTexture = LoadTexture("Assets/sword.png");
 	//SDL_Texture* fishTexture = LoadTexture("Assets/fish_blue1.bmp");
@@ -179,6 +199,9 @@ int main(int argc, char* argv[])
 
 	int keyboardX = 0;
 	int keyboardY = 0;
+
+	int arrowX = 100;
+	int arrowY = 100;
 
 	int mouseX = 100;
 	int mouseY = 100;
@@ -239,6 +262,20 @@ int main(int argc, char* argv[])
 			if (state[SDL_SCANCODE_D]) {
 				keyboardX += movementSpeed;
 			}
+
+			if (state[SDL_SCANCODE_UP]) {
+				arrowY -= movementSpeed;
+			}
+			if (state[SDL_SCANCODE_DOWN]) {
+				arrowY += movementSpeed;
+			}
+			if (state[SDL_SCANCODE_LEFT]) {
+				arrowX -= movementSpeed;
+			}
+			if (state[SDL_SCANCODE_RIGHT]) {
+				arrowX += movementSpeed;
+			}
+
 			if (state[SDL_SCANCODE_SPACE]) {
 				Mix_PlayChannel(-1, coinSFX, 0);
 			}
@@ -318,16 +355,15 @@ int main(int argc, char* argv[])
 		SDL_RenderClear(g_sdlRenderer);
 
 		// TODO: Create a destination for where the image will be copied {x, y, w, h}
-		SDL_Rect destinationRect{ 0, 0, 32, 32 };
+		SDL_Rect destinationRect{ arrowX, arrowY, 32, 32 };
 		SDL_Rect destinationRect2{ keyboardX, keyboardY, 40, 40 };
 		SDL_Rect destinationRect3{ mouseX - 16, mouseY - 16, 32, 32 };
 
 		// TODO: Font Rect
-		SDL_Rect fontDstRect{ 25, 100, 300, 32 };
 		SDL_RenderCopy(g_sdlRenderer, textTexture, NULL, &fontDstRect);
 
 		// TODO: Copy the texture onto the rendering target
-		//SDL_RenderCopy(g_sdlRenderer, doorTexture, NULL, &destinationRect);
+		SDL_RenderCopy(g_sdlRenderer, doorTexture, NULL, &destinationRect);
 		//SDL_RenderCopy(g_sdlRenderer, crusaderTexture, NULL, &destinationRect2);
 		SDL_RenderCopy(g_sdlRenderer, pngTexture, NULL, &destinationRect2);
 		SDL_RenderCopy(g_sdlRenderer, textureWithoutSurface, NULL, &destinationRect3);
