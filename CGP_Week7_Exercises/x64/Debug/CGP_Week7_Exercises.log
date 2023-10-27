@@ -1,0 +1,16 @@
+﻿  main.cpp
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(235,76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(235,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(235,13): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(234,111): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(234,75): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(234,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(283,32): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(287,32): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(291,32): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(294,32): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(298,31): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(301,31): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(304,31): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\main.cpp(307,31): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+  CGP_Week7_Exercises.vcxproj -> B:\University Projects\CGP-Exercises\CGP_Week7_Exercises\x64\Debug\CGP_Week7_Exercises.exe
