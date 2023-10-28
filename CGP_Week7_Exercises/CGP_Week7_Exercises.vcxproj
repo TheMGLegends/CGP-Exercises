@@ -133,6 +133,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -140,6 +143,9 @@
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="CircleCollider.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="GameObject.h" />

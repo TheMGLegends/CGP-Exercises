@@ -1,8 +1,8 @@
 #include "Factory.h"
 
-GameObject Factory::CreateGameObject(SDL_Texture* texture)
+GameObject Factory::CreateGameObject(SDL_Texture* texture, bool IsStatic)
 {
-	return GameObject{ texture };
+	return GameObject{ texture, IsStatic };
 }
 
 int Factory::DestroyGameObject(GameObject object)

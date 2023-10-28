@@ -8,13 +8,14 @@
 #include "SDL_mixer.h"
 #include "SDL_ttf.h"
 #include "Collision.h"
+#include <vector>
 
 SDL_Window* g_sdlWindow;
 SDL_Renderer* g_sdlRenderer;
 TTF_Font* g_font;
 
-const int SCREEN_W = 1000;
-const int SCREEN_H = 1000;
+const int SCREEN_W = 500;
+const int SCREEN_H = 500;
 
 int g_fontPSize = 32;
 
@@ -143,12 +144,12 @@ int main(int argc, char* argv[])
 	srand(unsigned int(time(NULL)));
 
 	// TODO: Collision Test
-	if (Collision::CircleCollision(10, 10, 1, 3, 2, 0.5f)) {
-		std::cout << "Overlap Detected!" << std::endl;
-	}
-	else {
-		std::cout << "No overlap!" << std::endl;
-	}
+	//if (Collision::CircleCollision(10, 10, 1, 3, 2, 0.5f)) {
+	//	std::cout << "Overlap Detected!" << std::endl;
+	//}
+	//else {
+	//	std::cout << "No overlap!" << std::endl;
+	//}
 
 	Factory factory{};
 
@@ -182,9 +183,15 @@ int main(int argc, char* argv[])
 
 	SDL_Texture* doorTexture = LoadTexture("Assets/door.png");
 	//SDL_Texture* crusaderTexture = LoadTexture("Assets/crusader.bmp");
-	SDL_Texture* pngTexture = LoadTexture("Assets/sword.png");
-	GameObject sword = factory.CreateGameObject(pngTexture);
-	GameObject door = factory.CreateGameObject(doorTexture);
+	SDL_Texture* pngTexture = LoadTexture("Assets/door.png");
+	GameObject sword = factory.CreateGameObject(pngTexture, false);
+	GameObject door = factory.CreateGameObject(doorTexture, true);
+
+	std::vector<GameObject> gameObjectList;
+
+	gameObjectList.push_back(sword);
+	gameObjectList.push_back(door);
+
 	//GameObject sword{ pngTexture };
 	
 	//SDL_Texture* fishTexture = LoadTexture("Assets/fish_blue1.bmp");
@@ -231,10 +238,33 @@ int main(int argc, char* argv[])
 
 	while (keepRunning)
 	{
-		if (Collision::CircleCollision(sword.m_x + sword.m_width / 2, sword.m_y + sword.m_height / 2, sword.m_width / 2,
-			door.m_x + door.m_width / 2, door.m_y + door.m_height / 2, door.m_width / 2)) {
-			std::cout << "Sword and door are overlapping!" << std::endl;
+		//if (Collision::CircleCollision(sword.m_x + sword.m_width / 2, sword.m_y + sword.m_height / 2, sword.m_width / 2,
+		//	door.m_x + door.m_width / 2, door.m_y + door.m_height / 2, door.m_width / 2)) {
+		//	std::cout << "Sword and door are overlapping!" << std::endl;
+		//}
+
+		//if (Collision::BoundingBoxCollision(sword.m_x, sword.m_y, sword.m_width, sword.m_height, 
+		//	door.m_x, door.m_y, door.m_width, door.m_height)) {
+		//	std::cout << "Sword and door are overlapping!" << std::endl;
+		//}
+
+		//if (Collision::CircleCollision(sword.circleCollider, door.circleCollider)) {
+		//	std::cout << "Sword and door are overlapping!" << std::endl;
+		//}
+
+		for (int i = 0; i < GameObject::gameObjects; i++)
+		{
+			for (int j = i + 1; j < GameObject::gameObjects; j++)
+			{
+				if (Collision::BoundingBoxCollision(gameObjectList[i].boxCollider, gameObjectList[j].boxCollider) && gameObjectList[i].isStatic && gameObjectList[j].isStatic) {
+					std::cout << "Sword and door are overlapping!" << std::endl;
+				}
+			}
 		}
+
+		//if (Collision::BoundingBoxCollision(sword.boxCollider, door.boxCollider)) {
+		//	std::cout << "Sword and door are overlapping!" << std::endl;
+		//}
 
 		Time::CalculateDeltaTime(previousFrameTicks);
 		previousFrameTicks = SDL_GetTicks();
@@ -280,31 +310,35 @@ int main(int argc, char* argv[])
 			if (state[SDL_SCANCODE_W])
 			{
 				std::cout << "W was pressed!" << std::endl;
-				sword.m_y -= movementSpeed * deltaTime;
+				sword.boxCollider.m_y -= movementSpeed * deltaTime;
+				sword.circleCollider.m_y -= movementSpeed * deltaTime;
 			}
 			if (state[SDL_SCANCODE_S])
 			{
-				sword.m_y += movementSpeed * deltaTime;
+				sword.boxCollider.m_y += movementSpeed * deltaTime;
+				sword.circleCollider.m_y += movementSpeed * deltaTime;
 			}
 			if (state[SDL_SCANCODE_A])
 			{
-				sword.m_x -= movementSpeed * deltaTime;
+				sword.boxCollider.m_x -= movementSpeed * deltaTime;
+				sword.circleCollider.m_x -= movementSpeed * deltaTime;
 			}
 			if (state[SDL_SCANCODE_D]) {
-				sword.m_x += movementSpeed * deltaTime;
+				sword.boxCollider.m_x += movementSpeed * deltaTime;
+				sword.circleCollider.m_x += movementSpeed * deltaTime;
 			}
 
 			if (state[SDL_SCANCODE_UP]) {
-				door.m_y -= movementSpeed * deltaTime;
+				//door.m_y -= movementSpeed * deltaTime;
 			}
 			if (state[SDL_SCANCODE_DOWN]) {
-				door.m_y += movementSpeed * deltaTime;
+				//door.m_y += movementSpeed * deltaTime;
 			}
 			if (state[SDL_SCANCODE_LEFT]) {
-				door.m_x -= movementSpeed * deltaTime;
+				//door.m_x -= movementSpeed * deltaTime;
 			}
 			if (state[SDL_SCANCODE_RIGHT]) {
-				door.m_x += movementSpeed * deltaTime;
+				//door.m_x += movementSpeed * deltaTime;
 			}
 
 			if (state[SDL_SCANCODE_SPACE]) {
@@ -417,6 +451,10 @@ int main(int argc, char* argv[])
 
 		// TODO: Update the screen with the state of the render target
 		SDL_RenderPresent(g_sdlRenderer);
+
+		gameObjectList.clear();
+		gameObjectList.push_back(sword);
+		gameObjectList.push_back(door);
 
 		// TODO: Halt execution for 16 milliseconds (approx. 60 frames per second)
 		SDL_Delay(16);

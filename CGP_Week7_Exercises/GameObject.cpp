@@ -1,12 +1,16 @@
 #include "GameObject.h"
 
-GameObject::GameObject(SDL_Texture* texture)
+int GameObject::gameObjects = 0;
+
+GameObject::GameObject(SDL_Texture* texture, bool IsStatic)
 {
 	m_texture = texture;
+	isStatic = IsStatic;
+	gameObjects++;
 }
 
 void GameObject::Draw(SDL_Renderer* renderer)
 {
-	SDL_Rect destinationRect{ m_x, m_y, m_width, m_height };
+	SDL_Rect destinationRect{ boxCollider.m_x, boxCollider.m_y, boxCollider.m_width, boxCollider.m_height };
 	SDL_RenderCopy(renderer, m_texture, NULL, &destinationRect);
 }

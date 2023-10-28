@@ -4,7 +4,7 @@
 class Factory
 {
 public:
-	GameObject CreateGameObject(SDL_Texture* texture);
+	GameObject CreateGameObject(SDL_Texture* texture, bool IsStatic);
 	int DestroyGameObject(GameObject object);
 };
 
