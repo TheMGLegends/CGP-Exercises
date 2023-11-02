@@ -1,0 +1,10 @@
+﻿  GameObject.cpp
+B:\University Projects\CGP-Exercises\CGP_Week8_Exercises\GameObject.cpp(14,44): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+B:\University Projects\CGP-Exercises\CGP_Week8_Exercises\GameObject.cpp(14,44): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week8_Exercises\GameObject.cpp(14,71): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+B:\University Projects\CGP-Exercises\CGP_Week8_Exercises\GameObject.cpp(14,71): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week8_Exercises\GameObject.cpp(14,93): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+B:\University Projects\CGP-Exercises\CGP_Week8_Exercises\GameObject.cpp(14,93): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week8_Exercises\GameObject.cpp(14,114): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+B:\University Projects\CGP-Exercises\CGP_Week8_Exercises\GameObject.cpp(14,114): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  CGP_Week8_Exercises.vcxproj -> B:\University Projects\CGP-Exercises\CGP_Week8_Exercises\x64\Debug\CGP_Week8_Exercises.exe
