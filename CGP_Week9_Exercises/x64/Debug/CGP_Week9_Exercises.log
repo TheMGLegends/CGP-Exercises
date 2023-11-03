@@ -1,0 +1,10 @@
+﻿  main.cpp
+B:\University Projects\CGP-Exercises\CGP_Week9_Exercises\main.cpp(404,32): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week9_Exercises\main.cpp(408,32): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week9_Exercises\main.cpp(412,32): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week9_Exercises\main.cpp(416,32): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week9_Exercises\main.cpp(441,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week9_Exercises\main.cpp(442,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week9_Exercises\main.cpp(448,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+B:\University Projects\CGP-Exercises\CGP_Week9_Exercises\main.cpp(449,19): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  CGP_Week9_Exercises.vcxproj -> B:\University Projects\CGP-Exercises\CGP_Week9_Exercises\x64\Debug\CGP_Week9_Exercises.exe
