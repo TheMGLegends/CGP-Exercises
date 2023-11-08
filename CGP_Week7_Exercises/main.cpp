@@ -189,6 +189,7 @@ int main(int argc, char* argv[])
 
 	std::vector<GameObject> gameObjectList;
 
+	sword.boxCollider.m_x = 200;
 	gameObjectList.push_back(sword);
 	gameObjectList.push_back(door);
 
@@ -252,12 +253,14 @@ int main(int argc, char* argv[])
 		//	std::cout << "Sword and door are overlapping!" << std::endl;
 		//}
 
-		for (int i = 0; i < GameObject::gameObjects; i++)
+		for (int i = 0; i < gameObjectList.size(); i++)
 		{
-			for (int j = i + 1; j < GameObject::gameObjects; j++)
+			for (int j = 0; j < gameObjectList.size(); j++)
 			{
-				if (Collision::BoundingBoxCollision(gameObjectList[i].boxCollider, gameObjectList[j].boxCollider) && gameObjectList[i].isStatic && gameObjectList[j].isStatic) {
-					std::cout << "Sword and door are overlapping!" << std::endl;
+				if (i != j) {
+					if (Collision::BoundingBoxCollision(gameObjectList[i].boxCollider, gameObjectList[j].boxCollider) && (!gameObjectList[i].isStatic || !gameObjectList[j].isStatic)) {
+						std::cout << "Sword and door are overlapping!" << std::endl;
+					}
 				}
 			}
 		}
