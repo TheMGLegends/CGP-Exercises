@@ -193,6 +193,8 @@ int main(int argc, char* argv[])
 
 	SDL_Texture* sonicTexture = LoadTexture("Assets/sonic.png");
 	GameObject sonic{ sonicTexture, false };
+	sonic.boxCollider.m_x = 500;
+	sonic.boxCollider.m_y = 500;
 	sonic.isAnimated = true;
 	sonic.animationSpeed = 5;
 	sonic.animPixelWidth = 48;
@@ -367,8 +369,8 @@ int main(int argc, char* argv[])
 					sonic.animState = 9;
 					sonic.animFrames = 4;
 
-					sonic.isFlipped = true;
 				}
+				sonic.isFlipped = true;
 
 				
 			}
@@ -384,12 +386,27 @@ int main(int argc, char* argv[])
 					sonic.animFrames = 4;
 
 
-					sonic.isFlipped = false;
 				}
+				sonic.isFlipped = false;
 				
 			}
 
-			if (!state[SDL_SCANCODE_W] && !state[SDL_SCANCODE_S] && !state[SDL_SCANCODE_A] && !state[SDL_SCANCODE_D]) {
+			if (state[SDL_SCANCODE_SPACE]) {
+				if (sonic.animState != 5) {
+					sonic.animationSpeed = 5;
+					sonic.animPixelWidth = 48;
+					sonic.animPixelHeight = 48;
+					sonic.animState = 5;
+					sonic.animFrames = 3;
+				}
+
+				if (sonic.currentFrameIndex == 2) {
+					sonic.boxCollider.m_y -= movementSpeed * deltaTime * 2;
+					sonic.circleCollider.m_y -= movementSpeed * deltaTime * 2;
+				}
+			}
+
+			if (!state[SDL_SCANCODE_W] && !state[SDL_SCANCODE_S] && !state[SDL_SCANCODE_A] && !state[SDL_SCANCODE_D] && !state[SDL_SCANCODE_SPACE]) {
 				if (sonic.animState != 1) {
 					sonic.animationSpeed = 5;
 					sonic.animPixelWidth = 48;
@@ -398,6 +415,7 @@ int main(int argc, char* argv[])
 					sonic.animFrames = 7;
 				}
 			}
+
 
 			if (state[SDL_SCANCODE_UP]) {
 				//door.m_y -= movementSpeed * deltaTime;
@@ -416,7 +434,7 @@ int main(int argc, char* argv[])
 				g_cameraX += movementSpeed * deltaTime;
 			}
 
-			if (state[SDL_SCANCODE_SPACE]) {
+			if (state[SDL_SCANCODE_M]) {
 				Mix_PlayChannel(-1, coinSFX, 0);
 
 				sonic.m_texture = doorTexture;

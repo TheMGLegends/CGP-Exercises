@@ -7,6 +7,7 @@ GameObject::GameObject(SDL_Texture* texture, bool IsStatic)
 	m_texture = texture;
 	isStatic = IsStatic;
 	gameObjects++;
+	currentFrameIndex = 0;
 }
 
 void GameObject::Draw(SDL_Renderer* renderer, int cameraX, int cameraY)
@@ -14,7 +15,7 @@ void GameObject::Draw(SDL_Renderer* renderer, int cameraX, int cameraY)
 	SDL_Rect srcRect;
 
 	if (isAnimated) {
-		int currentFrameIndex = (int)(timeInAnimationState * animationSpeed) % animFrames;
+		currentFrameIndex = (int)(timeInAnimationState * animationSpeed) % animFrames;
 		srcRect = { currentFrameIndex * animPixelWidth, animState * animPixelHeight, animPixelWidth, animPixelHeight };
 	}
 	

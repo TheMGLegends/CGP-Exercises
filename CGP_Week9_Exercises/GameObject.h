@@ -17,6 +17,7 @@ public:
 	float timeInAnimationState = 0;
 	float animationSpeed = 1;
 	bool isFlipped = false;
+	int currentFrameIndex;
 
 	GameObject(SDL_Texture* texture, bool IsStatic);
 
