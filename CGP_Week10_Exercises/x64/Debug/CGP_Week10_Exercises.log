@@ -1,10 +1,10 @@
 ﻿  main.cpp
-C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(433,32): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(437,32): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(441,32): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(445,32): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(470,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(471,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(477,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(478,19): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(444,32): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(448,32): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(452,32): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(456,32): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(481,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(482,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(488,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\main.cpp(489,19): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   CGP_Week10_Exercises.vcxproj -> C:\Users\5CINCM67\Documents\GitHub\CGP-Exercises\CGP_Week10_Exercises\x64\Debug\CGP_Week10_Exercises.exe

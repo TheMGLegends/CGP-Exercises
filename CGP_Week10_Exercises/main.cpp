@@ -251,6 +251,8 @@ int main(int argc, char* argv[])
 
 	Uint32 previousFrameTicks = SDL_GetTicks();
 
+	bool hasJumped = false;
+
 	while (keepRunning)
 	{
 		sonic.timeInAnimationState = SDL_GetTicks() / 1000.0f;
@@ -402,6 +404,10 @@ int main(int argc, char* argv[])
 
 			}
 
+			if (!state[SDL_SCANCODE_SPACE]) {
+				hasJumped = false;
+			}
+
 			if (state[SDL_SCANCODE_SPACE]) {
 				if (sonic.animState != 5) {
 					sonic.animationSpeed = 5;
@@ -411,9 +417,14 @@ int main(int argc, char* argv[])
 					sonic.animFrames = 3;
 				}
 
+				if (!hasJumped) {
+					sonic.rb.m_velocityY -= sonic.rb.m_speed * 500;
+					hasJumped = true;
+				}
+				
 				if (sonic.currentFrameIndex == 2) {
-					sonic.boxCollider.m_y -= movementSpeed * deltaTime * 2;
-					sonic.circleCollider.m_y -= movementSpeed * deltaTime * 2;
+					//sonic.boxCollider.m_y -= movementSpeed * deltaTime * 2;
+					//sonic.circleCollider.m_y -= movementSpeed * deltaTime * 2;
 				}
 			}
 
